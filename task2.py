@@ -1,5 +1,5 @@
 import sys
-def analysis(ours, theirs, length):    
+def display_result(ours, theirs, length):    
     print("Log File Analysis")
     print("="*17)
     print(f"Cat Visits {ours}")
@@ -13,21 +13,23 @@ def analysis(ours, theirs, length):
 if __name__ == "__main__":
     data_lst = []
     length = []
+    try:
+        f = open(sys.argv[1])
+        for x in f.readlines():
+            data = x.strip()
+            data_lst.append(data.split(","))
 
-    f = open(sys.argv[1])
-    for x in f.readlines():
-        data = x.strip()
-        data_lst.append(data.split(","))
-    
-    f.close()
-    theirs, ours = 0,0
+        f.close()
+        theirs, ours = 0,0
 
-    for x in data_lst:
-        if x[0]=="THEIRS":
-            theirs += 1
-        elif x[0] == "OURS":
-            ours +=1
-            duration = int(x[2]) - int(x[1])
-            length.append(duration)
+        for x in data_lst:
+            if x[0]=="THEIRS":
+                theirs += 1
+            elif x[0] == "OURS":
+                ours +=1
+                duration = int(x[2]) - int(x[1])
+                length.append(duration)
 
-    analysis(ours, theirs, length)
+        display_result(ours, theirs, length)
+    except Exception as e:
+        print(e)

@@ -30,9 +30,7 @@ if __name__ == "__main__":
     
     
     order = get_order()
-    # flags["delivery_flag"] = set_flag("Is delivery required? ")#input vlidtion
-    # flags["tuesday_flag"] = set_flag("Is it Tuesday? ")
-    # flags["use_app"] = set_flag("Did the customer use the app? ")
+    
     flags = {i:set_flag(j) for i, j in zip(flagname, questions)}
 
     if order>=5 or not flags["delivery"]:
